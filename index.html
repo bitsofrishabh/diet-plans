@@ -1,71 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> 14-Day Detox Diet Plan</title>
+    <title>14-Day Detox Diet Plan By Rishabh & Savita</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <!-- Chosen Palette: Mint & Slate -->
-    <!-- Application Structure Plan: This SPA is designed for clarity and ease of use in navigating a 14-day plan. The structure begins with an introduction and a section for 'Core Daily Habits' which lists recurring drinks to avoid repetition. The main interactive component is the '14-Day Meal Schedule'. This uses a tabbed-style interface with buttons for each day. Clicking a day dynamically updates the main content area to show that specific day's meals. This prevents overwhelming the user with a 14-day list at once and allows focused viewing. The selected day's meals are displayed in a clean, vertical timeline format. This structure is chosen for its intuitive navigation, making it easy for a user to track their progress and look up any day's plan instantly. -->
+    <!-- Application Structure Plan: This SPA is designed for clarity and ease of use in navigating a 14-day plan. The structure begins with an introduction and a section for 'Core Daily Habits' which lists recurring drinks to avoid repetition. The main interactive component is the '14-Day Meal Schedule'. This uses a tabbed-style interface with buttons for each day. Clicking a day dynamically updates the main content area to show that specific day's meals. This prevents overwhelming the user with a 14-day list at once and allows focused viewing. A new 'Weekly Diet Overview' section with a dropdown-controlled table view has been added to provide a macro-level summary of the plan. This structure is chosen for its intuitive navigation, making it easy for a user to track their progress and look up any day's plan instantly. -->
     <!-- Visualization & Content Choices: 
         - Report Info: Full 14-Day Meal Plan -> Goal: Easy Daily Reference -> Viz/Method: Dynamic HTML content blocks organized by mealtime -> Interaction: Day selection buttons filter and render the correct day's data from a JS object -> Justification: A tabbed view is superior to a long scroll for a multi-day plan, providing quick, structured access to information.
+        - Report Info: Full 14-Day Meal Plan -> Goal: Weekly Overview -> Viz/Method: HTML Table -> Interaction: Dropdown to select week, dynamically populating the table -> Justification: The table provides a dense, scannable overview for weekly planning, complementing the daily view.
         - Report Info: Recurring daily drinks -> Goal: Emphasize Habits -> Viz/Method: Static HTML list in a dedicated section -> Interaction: None -> Justification: Separating these from the daily plan highlights them as foundational habits and reduces redundancy in the main meal display.
     -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: #F0F4F8;
-            /* Light Slate Blue */
-            color: #334155;
-            /* Slate 700 */
+            background-color: #F0F4F8; /* Light Slate Blue */
+            color: #334155; /* Slate 700 */
         }
-
-        .bg-primary {
-            background-color: #F0F4F8;
-        }
-
-        .bg-card {
-            background-color: #FFFFFF;
-        }
-
-        .bg-accent {
-            background-color: #A7F3D0;
-        }
-
-        /* Mint-like Green */
-        .text-accent {
-            color: #047857;
-        }
-
-        /* Green 700 */
+        .bg-primary { background-color: #F0F4F8; }
+        .bg-card { background-color: #FFFFFF; }
+        .bg-accent { background-color: #A7F3D0; } /* Mint-like Green */
+        .text-accent { color: #047857; } /* Green 700 */
         .day-button {
             padding: 0.5rem 1rem;
             border-radius: 0.5rem;
-            background-color: #E2E8F0;
-            /* Slate 200 */
-            color: #475569;
-            /* Slate 600 */
+            background-color: #E2E8F0; /* Slate 200 */
+            color: #475569; /* Slate 600 */
             transition: all 0.3s ease;
             font-weight: 600;
             border: 1px solid transparent;
         }
-
         .day-button.active {
-            background-color: #047857;
-            /* Green 700 */
+            background-color: #047857; /* Green 700 */
             color: #FFFFFF;
         }
-
         .day-button:hover:not(.active) {
-            background-color: #CBD5E1;
-            /* Slate 300 */
-            border-color: #94A3B8;
-            /* Slate 400 */
+            background-color: #CBD5E1; /* Slate 300 */
+            border-color: #94A3B8; /* Slate 400 */
         }
-
         .meal-card {
             display: flex;
             align-items: center;
@@ -73,27 +48,27 @@
             border-left: 4px solid #A7F3D0;
             background-color: #f8fafc;
         }
+        .table-responsive-wrapper {
+            overflow-x: auto;
+        }
     </style>
 </head>
-
 <body class="bg-primary">
 
     <main class="container mx-auto px-4 py-8 md:py-12">
 
         <section id="hero" class="text-center mb-12">
-            <h1 class="text-3xl md:text-5xl font-extrabold mb-4 text-slate-800">14-Day Vegetarian Detox Plan</h1>
+            <h1 class="text-3xl md:text-5xl font-extrabold mb-4 text-slate-800">14-Day Veg Detox Diet Plan By Rishabh & Savita</h1>
             <p class="max-w-3xl mx-auto text-lg text-slate-600">
-                An interactive guide to the two-week vegetarian detox diet. This plan focuses on clean eating to help
-                reset your system. Select a day below to view the detailed meal schedule.
+                An interactive guide to the two-week vegetarian detox diet. This plan focuses on clean eating to help reset your system. Select a day below to view the detailed meal schedule.
             </p>
         </section>
 
         <section id="core-habits" class="mb-12">
             <div class="max-w-4xl mx-auto bg-card p-6 rounded-xl shadow-md">
-                <h3 class="text-2xl font-bold text-center mb-4 text-accent">Core Daily Habits</h3>
-                <p class="text-center text-slate-600 mb-6">These drinks are a consistent part of the plan, designed to
-                    be taken at the same time each day to support the detox process.</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-center">
+                 <h3 class="text-2xl font-bold text-center mb-4 text-accent">Core Daily Habits</h3>
+                 <p class="text-center text-slate-600 mb-6">These drinks are a consistent part of the plan, designed to be taken at the same time each day to support the detox process.</p>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-center">
                     <div class="bg-primary p-4 rounded-lg">
                         <p class="font-semibold text-slate-500">Early Morning (6:00 AM)</p>
                         <p class="text-lg font-bold text-slate-700">Jeera, Ajwain, Methi Water with Lemon</p>
@@ -102,13 +77,13 @@
                         <p class="font-semibold text-slate-500">Bed Time (11:00 PM)</p>
                         <p class="text-lg font-bold text-slate-700">Warm Water with ACV & Cinnamon</p>
                     </div>
-                </div>
+                 </div>
             </div>
         </section>
 
         <section id="meal-plan" class="mb-12">
             <div class="bg-card p-4 sm:p-6 rounded-xl shadow-lg">
-                <h3 class="text-2xl font-bold text-center mb-6 text-accent">14-Day Meal Schedule</h3>
+                <h3 class="text-2xl font-bold text-center mb-6 text-accent">Daily Meal Schedule</h3>
                 <div id="day-selector" class="flex flex-wrap justify-center gap-2 mb-8">
                     <!-- Day buttons will be inserted here -->
                 </div>
@@ -117,6 +92,36 @@
                     <div id="meal-display" class="space-y-4">
                         <!-- Meals will be displayed here -->
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="table-view" class="mb-12">
+            <div class="bg-card p-4 sm:p-6 rounded-xl shadow-lg">
+                <h3 class="text-2xl font-bold text-center mb-6 text-accent">Weekly Diet Overview</h3>
+                <div class="flex justify-center mb-6">
+                    <select id="week-selector" class="p-2 border border-slate-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500">
+                        <option value="1">Week 1</option>
+                        <option value="2">Week 2</option>
+                    </select>
+                </div>
+                <div class="table-responsive-wrapper">
+                    <table class="min-w-full divide-y divide-slate-200">
+                        <thead class="bg-slate-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Day</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Breakfast</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Mid Morning</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Tea Time</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Lunch</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Snack</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Dinner</th>
+                            </tr>
+                        </thead>
+                        <tbody id="diet-table-body" class="bg-white divide-y divide-slate-200">
+                            <!-- Table rows will be inserted here -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </section>
@@ -131,238 +136,283 @@
     </footer>
 
     <script>
-        const dietData = [
-            // Day 1: 20 Jun 25, Friday
-            {
-                day: 1, date: "June 20, 2025 - Friday",
-                meals: {
-                    "Breakfast (9:00 AM)": ["Suji ka Cheela (1 piece)", "Paneer Bhurji (1 katori)", "5 black raisins, 4 almonds, 1 walnut (soaked)"],
-                    "Mid Morning (11:00 AM)": ["Papaya, Ripe (100 grams)", "Mixed Seeds (1 teaspoon)"],
-                    "Tea Time (12:30 PM)": ["Green Tea (1 cup)"],
-                    "Lunch (1:00 PM)": ["Vegetable Daliya (1 katori)", "Tomato Cucumber Salad (1 katori)", "Buttermilk (1 cup)"],
-                    "Snack (5:00 PM)": ["Boiled Peanuts and Corn Chat (1 katori)", "Green Tea (1 cup)"],
-                    "Dinner (8:00 PM)": ["Green Beans Curry (1 katori)", "Vegetable Besan Cheela (1 cheela)"]
-                }
-            },
-            // Day 2: 21 Jun 25, Saturday
-            {
-                day: 2, date: "June 21, 2025 - Saturday",
-                meals: {
-                    "Breakfast (9:00 AM)": ["5 black raisins, 4 almonds, 1 walnut (soaked)", "Coconut water (100 ml)"],
-                    "Mid Morning (11:00 AM)": ["Papaya, Ripe (100 grams)", "Mixed Seeds (1 teaspoon)"],
-                    "Tea Time (12:30 PM)": ["Green Tea (1 cup)"],
-                    "Lunch (1:00 PM)": ["Tomato Cucumber Salad (1 katori)", "Buttermilk (1 cup)", "Paneer Fried Rice (1 katori)"],
-                    "Snack (5:00 PM)": ["Boiled Peanuts and Corn Chat (1 katori)", "Green Tea (1 cup)"],
-                    "Dinner (8:00 PM)": ["Moong Daal Cheela (1 cheela)", "Paneer Bhurji (1 katori)"]
-                }
-            },
-            // Day 3: 22 Jun 25, Sunday
-            {
-                day: 3, date: "June 22, 2025 - Sunday",
-                meals: {
-                    "Breakfast (9:00 AM)": ["5 black raisins, 4 almonds, 1 walnut (soaked)", "Vegetable Poha (1 katori)"],
-                    "Mid Morning (11:00 AM)": ["Papaya, Ripe (100 grams)", "Mixed Seeds (1 teaspoon)"],
-                    "Tea Time (12:30 PM)": ["Green Tea (1 cup)"],
-                    "Lunch (1:00 PM)": ["Tomato Cucumber Salad (1 katori)", "Paneer Stuffed Roti (1 piece)", "Buttermilk (1 cup)"],
-                    "Snack (5:00 PM)": ["Boiled Peanuts and Corn Chat (1 katori)", "Green Tea (1 cup)"],
-                    "Dinner (8:00 PM)": ["Oats Khichdi (1 katori)"]
-                }
-            },
-            // Day 4: 23 Jun 25, Monday
-            {
-                day: 4, date: "June 23, 2025 - Monday",
-                meals: {
-                    "Breakfast (9:00 AM)": ["5 black raisins, 4 almonds, 1 walnut (soaked)", "Masala Oats with Vegetables (1 serve)"],
-                    "Mid Morning (11:00 AM)": ["Papaya, Ripe (100 grams)", "Mixed Seeds (1 teaspoon)"],
-                    "Tea Time (12:30 PM)": ["Green Tea (1 cup)"],
-                    "Lunch (1:00 PM)": ["Vegetable Besan Cheela (1 cheela)", "Buttermilk (1 cup)"],
-                    "Snack (5:00 PM)": ["Boiled Peanuts and Corn Chat (1 katori)", "Green Tea (1 cup)"],
-                    "Dinner (8:00 PM)": ["Sprout and Mix Vegetable Soup (1 katori)"]
-                }
-            },
-            // Day 5: 24 Jun 25, Tuesday
-            {
-                day: 5, date: "June 24, 2025 - Tuesday",
-                meals: {
-                    "Breakfast (9:00 AM)": ["5 black raisins, 4 almonds, 1 walnut (soaked)", "Paneer Makhana Salad (1 katori)"],
-                    "Mid Morning (11:00 AM)": ["Papaya, Ripe (100 grams)", "Mixed Seeds (1 teaspoon)"],
-                    "Tea Time (12:30 PM)": ["Green Tea (1 cup)"],
-                    "Lunch (1:00 PM)": ["Tomato Cucumber Salad (1 katori)", "Buttermilk (1 cup)", "Multigrain Roti (1 roti)", "Soya Chunks Gravy (1 katori)"],
-                    "Snack (5:00 PM)": ["Boiled Peanuts and Corn Chat (1 katori)", "Green Tea (1 cup)"],
-                    "Dinner (8:00 PM)": ["Masala Dosa (100 grams)", "Sambhar (100 grams)"]
-                }
-            },
-            // Day 6: 25 Jun 25, Wednesday
-            {
-                day: 6, date: "June 25, 2025 - Wednesday",
-                meals: {
-                    "Breakfast (9:00 AM)": ["5 black raisins, 4 almonds, 1 walnut (soaked)", "Sattu Drink (1 glass)"],
-                    "Mid Morning (11:00 AM)": ["Papaya, Ripe (100 grams)", "Mixed Seeds (1 teaspoon)"],
-                    "Tea Time (12:30 PM)": ["Green Tea (1 cup)"],
-                    "Lunch (1:00 PM)": ["Tomato Cucumber Salad (1 katori)", "Green Peas Moong Daal Khichdi (1 katori)", "Buttermilk (1 cup)"],
-                    "Snack (5:00 PM)": ["Boiled Peanuts and Corn Chat (1 katori)", "Green Tea (1 cup)"],
-                    "Dinner (8:00 PM)": ["Paneer Matar Corn Sabji (1 katori)", "Vegetable Besan Cheela (1 cheela)"]
-                }
-            },
-            // Day 7: 26 Jun 25, Thursday
-            {
-                day: 7, date: "June 26, 2025 - Thursday",
-                meals: {
-                    "Breakfast (9:00 AM)": ["5 black raisins, 4 almonds, 1 walnut (soaked)", "Coconut water (100 ml)"],
-                    "Mid Morning (11:00 AM)": ["Papaya, Ripe (100 grams)", "Mixed Seeds (1 teaspoon)"],
-                    "Tea Time (12:30 PM)": ["Green Tea (1 cup)"],
-                    "Lunch (1:00 PM)": ["Vegetable Daliya (1 katori)", "Tomato Cucumber Salad (1 katori)", "Buttermilk (1 cup)"],
-                    "Snack (5:00 PM)": ["Boiled Peanuts and Corn Chat (1 katori)", "Green Tea (1 cup)"],
-                    "Dinner (8:00 PM)": ["Moong Daal Cheela (1 cheela)", "Soya Chunks Gravy (1/2 katori)"]
-                }
-            },
-            // Day 8: 27 Jun 25, Friday
-            {
-                day: 8, date: "June 27, 2025 - Friday",
-                meals: {
-                    "Breakfast (9:00 AM)": ["5 black raisins, 4 almonds, 1 walnut (soaked)", "Vermicelli Upma (1 cup)"],
-                    "Mid Morning (11:00 AM)": ["Papaya, Ripe (100 grams)", "Mixed Seeds (1 teaspoon)"],
-                    "Tea Time (12:30 PM)": ["Green Tea (1 cup)"],
-                    "Lunch (1:00 PM)": ["Tomato Cucumber Salad (1 katori)", "Moong Dal and Bajra Khichdi (1 katori)", "Buttermilk (1 cup)"],
-                    "Snack (5:00 PM)": ["Green Tea (1 cup)", "Roasted Salted Makhana (1 cup) OR Boiled Peanuts and Corn Chat (1 katori)"],
-                    "Dinner (8:00 PM)": ["Drumstick Soup (1 bowl)"]
-                }
-            },
-            // Day 9: 28 Jun 25, Saturday
-            {
-                day: 9, date: "June 28, 2025 - Saturday",
-                meals: {
-                    "Breakfast (9:00 AM)": ["5 black raisins, 4 almonds, 1 walnut (soaked)", "Lemon Water With Salt (1 glass)"],
-                    "Mid Morning (11:00 AM)": ["Papaya, Ripe (100 grams)", "Mixed Seeds (1 teaspoon)"],
-                    "Tea Time (12:30 PM)": ["Green Tea (1 cup)"],
-                    "Lunch (1:00 PM)": ["Tomato Cucumber Salad (1 katori)", "Buttermilk (1 cup)", "Rajmah Curry (1 katori)", "Cooked White Rice (1 katori)"],
-                    "Snack (5:00 PM)": ["Green Tea (1 cup)", "Roasted Salted Makhana (1 cup) OR Boiled Peanuts and Corn Chat (1 katori)"],
-                    "Dinner (8:00 PM)": ["Aloo Roti (1 roti)", "Capsicum Bhajji (1 piece)"]
-                }
-            },
-            // Day 10: 29 Jun 25, Sunday
-            {
-                day: 10, date: "June 29, 2025 - Sunday",
-                meals: {
-                    "Breakfast (9:00 AM)": ["5 black raisins, 4 almonds, 1 walnut (soaked)", "Curd Rice with Tadka (1 katori)"],
-                    "Mid Morning (11:00 AM)": ["Papaya, Ripe (100 grams)", "Mixed Seeds (1 teaspoon)"],
-                    "Tea Time (12:30 PM)": ["Green Tea (1 cup)"],
-                    "Lunch (1:00 PM)": ["Tomato Cucumber Salad (1 katori)", "Buttermilk (1 cup)", "Mixed Vegetable Pulao (1 katori)"],
-                    "Snack (5:00 PM)": ["Green Tea (1 cup)", "Roasted Salted Makhana (1 cup) OR Boiled Peanuts and Corn Chat (1 katori)"],
-                    "Dinner (8:00 PM)": ["Chawal (100 grams)", "Arhar Dal Sambar (1 katori)"]
-                }
-            },
-            // Day 11: 30 Jun 25, Monday
-            {
-                day: 11, date: "June 30, 2025 - Monday",
-                meals: {
-                    "Breakfast (9:00 AM)": ["5 black raisins, 4 almonds, 1 walnut (soaked)", "Rawa Idli (3 idli)"],
-                    "Mid Morning (11:00 AM)": ["Papaya, Ripe (100 grams)", "Mixed Seeds (1 teaspoon)"],
-                    "Tea Time (12:30 PM)": ["Green Tea (1 cup)"],
-                    "Lunch (1:00 PM)": ["Tomato Cucumber Salad (1 katori)", "Chole Curry (1 katori)", "Chawal (100 grams)", "Buttermilk (1 cup)"],
-                    "Snack (5:00 PM)": ["Green Tea (1 cup)", "Roasted Salted Makhana (1 cup) OR Boiled Peanuts and Corn Chat (1 katori)"],
-                    "Dinner (8:00 PM)": ["Tomato Soup (100 grams)"]
-                }
-            },
-            // Day 12: 01 Jul 25, Tuesday
-            {
-                day: 12, date: "July 01, 2025 - Tuesday",
-                meals: {
-                    "Breakfast (9:00 AM)": ["5 black raisins, 4 almonds, 1 walnut (soaked)", "Apple (1 medium)"],
-                    "Mid Morning (11:00 AM)": ["Papaya, Ripe (100 grams)", "Mixed Seeds (1 teaspoon)"],
-                    "Tea Time (12:30 PM)": ["Green Tea (1 cup)"],
-                    "Lunch (1:00 PM)": ["Tomato Cucumber Salad (1 katori)", "Torai Ki Subzi (1 katori)", "Besan ki Roti (1 roti)", "Buttermilk (1 cup)"],
-                    "Snack (5:00 PM)": ["Green Tea (1 cup)", "Roasted Salted Makhana (1 cup) OR Boiled Peanuts and Corn Chat (1 katori)"],
-                    "Dinner (8:00 PM)": ["Paneer Sandwich (1 sandwich)"]
-                }
-            },
-            // Day 13: 02 Jul 25, Wednesday
-            {
-                day: 13, date: "July 02, 2025 - Wednesday",
-                meals: {
-                    "Breakfast (9:00 AM)": ["5 black raisins, 4 almonds, 1 walnut (soaked)", "Paneer Stuffed Roti (1 piece)", "Dahi Tadka (1 katori)"],
-                    "Mid Morning (11:00 AM)": ["Papaya, Ripe (100 grams)", "Mixed Seeds (1 teaspoon)"],
-                    "Tea Time (12:30 PM)": ["Green Tea (1 cup)"],
-                    "Lunch (1:00 PM)": ["Tomato Cucumber Salad (1 katori)", "Buttermilk (1 cup)", "Cooked Arhar Dal (1 katori)", "Cooked White Rice (1 katori)"],
-                    "Snack (5:00 PM)": ["Green Tea (1 cup)", "Roasted Salted Makhana (1 cup) OR Boiled Peanuts and Corn Chat (1 katori)"],
-                    "Dinner (8:00 PM)": ["Green Peas Moong Daal Khichdi (1 katori)"]
-                }
-            },
-            // Day 14: 03 Jul 25, Thursday
-            {
-                day: 14, date: "July 03, 2025 - Thursday",
-                meals: {
-                    "Breakfast (9:00 AM)": ["5 black raisins, 4 almonds, 1 walnut (soaked)", "Multigrain Bread Vegetable Sandwich (1 sandwich)"],
-                    "Mid Morning (11:00 AM)": ["Papaya, Ripe (100 grams)", "Mixed Seeds (1 teaspoon)"],
-                    "Tea Time (12:30 PM)": ["Green Tea (1 cup)"],
-                    "Lunch (1:00 PM)": ["Vegetable Chickpeas Salad (1 bowl)", "Buttermilk (1 cup)"],
-                    "Snack (5:00 PM)": ["Green Tea (1 cup)", "Roasted Salted Makhana (1 cup) OR Boiled Peanuts and Corn Chat (1 katori)"],
-                    "Dinner (8:00 PM)": ["Oats Khichdi (1 katori)"]
-                }
-            },
-        ];
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const daySelector = document.getElementById('day-selector');
-            const mealDisplay = document.getElementById('meal-display');
-            const mealDisplayDate = document.getElementById('meal-display-date');
-            let activeDay = 1;
-
-            function renderMeals(day) {
-                const dayData = dietData.find(d => d.day === day);
-                if (!dayData) return;
-
-                mealDisplayDate.textContent = `Day ${dayData.day}: ${dayData.date}`;
-                mealDisplay.innerHTML = '';
-
-                for (const [mealTime, items] of Object.entries(dayData.meals)) {
-                    const mealCard = document.createElement('div');
-                    mealCard.className = 'meal-card rounded-lg';
-
-                    const timeDiv = document.createElement('div');
-                    timeDiv.className = 'w-1/3 md:w-1/4 font-bold text-slate-800';
-                    timeDiv.textContent = mealTime;
-
-                    const itemsDiv = document.createElement('div');
-                    itemsDiv.className = 'w-2/3 md:w-3/4 text-slate-600';
-
-                    const ul = document.createElement('ul');
-                    ul.className = 'list-disc list-inside';
-                    items.forEach(item => {
-                        const li = document.createElement('li');
-                        li.textContent = item;
-                        ul.appendChild(li);
-                    });
-
-                    itemsDiv.appendChild(ul);
-                    mealCard.appendChild(timeDiv);
-                    mealCard.appendChild(itemsDiv);
-                    mealDisplay.appendChild(mealCard);
-                }
+    const dietData = [
+        // Day 1: 20 Jun 25, Friday
+        {
+            day: 1, date: "June 20, 2025 - Friday",
+            meals: {
+                "Breakfast (9:00 AM)": ["Suji ka Cheela (1 piece)", "Paneer Bhurji (1 katori)", "5 black raisins, 4 almonds, 1 walnut (soaked)"],
+                "Mid Morning (11:00 AM)": ["Papaya, Ripe (100 grams)", "Mixed Seeds (1 teaspoon)"],
+                "Tea Time (12:30 PM)": ["Green Tea (1 cup)"],
+                "Lunch (1:00 PM)": ["Vegetable Daliya (1 katori)", "Tomato Cucumber Salad (1 katori)", "Buttermilk (1 cup)"],
+                "Snack (5:00 PM)": ["Boiled Peanuts and Corn Chat (1 katori)", "Green Tea (1 cup)"],
+                "Dinner (8:00 PM)": ["Green Beans Curry (1 katori)", "Vegetable Besan Cheela (1 cheela)"]
             }
+        },
+        // Day 2: 21 Jun 25, Saturday
+        {
+            day: 2, date: "June 21, 2025 - Saturday",
+            meals: {
+                "Breakfast (9:00 AM)": ["5 black raisins, 4 almonds, 1 walnut (soaked)", "Coconut water (100 ml)"],
+                "Mid Morning (11:00 AM)": ["Papaya, Ripe (100 grams)", "Mixed Seeds (1 teaspoon)"],
+                "Tea Time (12:30 PM)": ["Green Tea (1 cup)"],
+                "Lunch (1:00 PM)": ["Tomato Cucumber Salad (1 katori)", "Buttermilk (1 cup)", "Paneer Fried Rice (1 katori)"],
+                "Snack (5:00 PM)": ["Boiled Peanuts and Corn Chat (1 katori)", "Green Tea (1 cup)"],
+                "Dinner (8:00 PM)": ["Moong Daal Cheela (1 cheela)", "Paneer Bhurji (1 katori)"]
+            }
+        },
+        // Day 3: 22 Jun 25, Sunday
+        {
+            day: 3, date: "June 22, 2025 - Sunday",
+            meals: {
+                "Breakfast (9:00 AM)": ["5 black raisins, 4 almonds, 1 walnut (soaked)", "Vegetable Poha (1 katori)"],
+                "Mid Morning (11:00 AM)": ["Papaya, Ripe (100 grams)", "Mixed Seeds (1 teaspoon)"],
+                "Tea Time (12:30 PM)": ["Green Tea (1 cup)"],
+                "Lunch (1:00 PM)": ["Tomato Cucumber Salad (1 katori)", "Paneer Stuffed Roti (1 piece)", "Buttermilk (1 cup)"],
+                "Snack (5:00 PM)": ["Boiled Peanuts and Corn Chat (1 katori)", "Green Tea (1 cup)"],
+                "Dinner (8:00 PM)": ["Oats Khichdi (1 katori)"]
+            }
+        },
+        // Day 4: 23 Jun 25, Monday
+        {
+            day: 4, date: "June 23, 2025 - Monday",
+            meals: {
+                "Breakfast (9:00 AM)": ["5 black raisins, 4 almonds, 1 walnut (soaked)", "Masala Oats with Vegetables (1 serve)"],
+                "Mid Morning (11:00 AM)": ["Papaya, Ripe (100 grams)", "Mixed Seeds (1 teaspoon)"],
+                "Tea Time (12:30 PM)": ["Green Tea (1 cup)"],
+                "Lunch (1:00 PM)": ["Vegetable Besan Cheela (1 cheela)", "Buttermilk (1 cup)"],
+                "Snack (5:00 PM)": ["Boiled Peanuts and Corn Chat (1 katori)", "Green Tea (1 cup)"],
+                "Dinner (8:00 PM)": ["Sprout and Mix Vegetable Soup (1 katori)"]
+            }
+        },
+        // Day 5: 24 Jun 25, Tuesday
+        {
+            day: 5, date: "June 24, 2025 - Tuesday",
+            meals: {
+                "Breakfast (9:00 AM)": ["5 black raisins, 4 almonds, 1 walnut (soaked)", "Paneer Makhana Salad (1 katori)"],
+                "Mid Morning (11:00 AM)": ["Papaya, Ripe (100 grams)", "Mixed Seeds (1 teaspoon)"],
+                "Tea Time (12:30 PM)": ["Green Tea (1 cup)"],
+                "Lunch (1:00 PM)": ["Tomato Cucumber Salad (1 katori)", "Buttermilk (1 cup)", "Multigrain Roti (1 roti)", "Soya Chunks Gravy (1 katori)"],
+                "Snack (5:00 PM)": ["Boiled Peanuts and Corn Chat (1 katori)", "Green Tea (1 cup)"],
+                "Dinner (8:00 PM)": ["Masala Dosa (100 grams)", "Sambhar (100 grams)"]
+            }
+        },
+        // Day 6: 25 Jun 25, Wednesday
+        {
+            day: 6, date: "June 25, 2025 - Wednesday",
+            meals: {
+                "Breakfast (9:00 AM)": ["5 black raisins, 4 almonds, 1 walnut (soaked)", "Sattu Drink (1 glass)"],
+                "Mid Morning (11:00 AM)": ["Papaya, Ripe (100 grams)", "Mixed Seeds (1 teaspoon)"],
+                "Tea Time (12:30 PM)": ["Green Tea (1 cup)"],
+                "Lunch (1:00 PM)": ["Tomato Cucumber Salad (1 katori)", "Green Peas Moong Daal Khichdi (1 katori)", "Buttermilk (1 cup)"],
+                "Snack (5:00 PM)": ["Boiled Peanuts and Corn Chat (1 katori)", "Green Tea (1 cup)"],
+                "Dinner (8:00 PM)": ["Paneer Matar Corn Sabji (1 katori)", "Vegetable Besan Cheela (1 cheela)"]
+            }
+        },
+        // Day 7: 26 Jun 25, Thursday
+        {
+            day: 7, date: "June 26, 2025 - Thursday",
+            meals: {
+                "Breakfast (9:00 AM)": ["5 black raisins, 4 almonds, 1 walnut (soaked)", "Coconut water (100 ml)"],
+                "Mid Morning (11:00 AM)": ["Papaya, Ripe (100 grams)", "Mixed Seeds (1 teaspoon)"],
+                "Tea Time (12:30 PM)": ["Green Tea (1 cup)"],
+                "Lunch (1:00 PM)": ["Vegetable Daliya (1 katori)", "Tomato Cucumber Salad (1 katori)", "Buttermilk (1 cup)"],
+                "Snack (5:00 PM)": ["Boiled Peanuts and Corn Chat (1 katori)", "Green Tea (1 cup)"],
+                "Dinner (8:00 PM)": ["Moong Daal Cheela (1 cheela)", "Soya Chunks Gravy (1/2 katori)"]
+            }
+        },
+        // Day 8: 27 Jun 25, Friday
+        {
+            day: 8, date: "June 27, 2025 - Friday",
+            meals: {
+                "Breakfast (9:00 AM)": ["5 black raisins, 4 almonds, 1 walnut (soaked)", "Vermicelli Upma (1 cup)"],
+                "Mid Morning (11:00 AM)": ["Papaya, Ripe (100 grams)", "Mixed Seeds (1 teaspoon)"],
+                "Tea Time (12:30 PM)": ["Green Tea (1 cup)"],
+                "Lunch (1:00 PM)": ["Tomato Cucumber Salad (1 katori)", "Moong Dal and Bajra Khichdi (1 katori)", "Buttermilk (1 cup)"],
+                "Snack (5:00 PM)": ["Green Tea (1 cup)", "Roasted Salted Makhana (1 cup) OR Boiled Peanuts and Corn Chat (1 katori)"],
+                "Dinner (8:00 PM)": ["Drumstick Soup (1 bowl)"]
+            }
+        },
+        // Day 9: 28 Jun 25, Saturday
+        {
+            day: 9, date: "June 28, 2025 - Saturday",
+            meals: {
+                "Breakfast (9:00 AM)": ["5 black raisins, 4 almonds, 1 walnut (soaked)", "Lemon Water With Salt (1 glass)"],
+                "Mid Morning (11:00 AM)": ["Papaya, Ripe (100 grams)", "Mixed Seeds (1 teaspoon)"],
+                "Tea Time (12:30 PM)": ["Green Tea (1 cup)"],
+                "Lunch (1:00 PM)": ["Tomato Cucumber Salad (1 katori)", "Buttermilk (1 cup)", "Rajmah Curry (1 katori)", "Cooked White Rice (1 katori)"],
+                "Snack (5:00 PM)": ["Green Tea (1 cup)", "Roasted Salted Makhana (1 cup) OR Boiled Peanuts and Corn Chat (1 katori)"],
+                "Dinner (8:00 PM)": ["Aloo Roti (1 roti)", "Capsicum Bhajji (1 piece)"]
+            }
+        },
+        // Day 10: 29 Jun 25, Sunday
+        {
+            day: 10, date: "June 29, 2025 - Sunday",
+            meals: {
+                "Breakfast (9:00 AM)": ["5 black raisins, 4 almonds, 1 walnut (soaked)", "Curd Rice with Tadka (1 katori)"],
+                "Mid Morning (11:00 AM)": ["Papaya, Ripe (100 grams)", "Mixed Seeds (1 teaspoon)"],
+                "Tea Time (12:30 PM)": ["Green Tea (1 cup)"],
+                "Lunch (1:00 PM)": ["Tomato Cucumber Salad (1 katori)", "Buttermilk (1 cup)", "Mixed Vegetable Pulao (1 katori)"],
+                "Snack (5:00 PM)": ["Green Tea (1 cup)", "Roasted Salted Makhana (1 cup) OR Boiled Peanuts and Corn Chat (1 katori)"],
+                "Dinner (8:00 PM)": ["Chawal (100 grams)", "Arhar Dal Sambar (1 katori)"]
+            }
+        },
+        // Day 11: 30 Jun 25, Monday
+        {
+            day: 11, date: "June 30, 2025 - Monday",
+            meals: {
+                "Breakfast (9:00 AM)": ["5 black raisins, 4 almonds, 1 walnut (soaked)", "Rawa Idli (3 idli)"],
+                "Mid Morning (11:00 AM)": ["Papaya, Ripe (100 grams)", "Mixed Seeds (1 teaspoon)"],
+                "Tea Time (12:30 PM)": ["Green Tea (1 cup)"],
+                "Lunch (1:00 PM)": ["Tomato Cucumber Salad (1 katori)", "Chole Curry (1 katori)", "Chawal (100 grams)", "Buttermilk (1 cup)"],
+                "Snack (5:00 PM)": ["Green Tea (1 cup)", "Roasted Salted Makhana (1 cup) OR Boiled Peanuts and Corn Chat (1 katori)"],
+                "Dinner (8:00 PM)": ["Tomato Soup (100 grams)"]
+            }
+        },
+        // Day 12: 01 Jul 25, Tuesday
+        {
+            day: 12, date: "July 01, 2025 - Tuesday",
+            meals: {
+                "Breakfast (9:00 AM)": ["5 black raisins, 4 almonds, 1 walnut (soaked)", "Apple (1 medium)"],
+                "Mid Morning (11:00 AM)": ["Papaya, Ripe (100 grams)", "Mixed Seeds (1 teaspoon)"],
+                "Tea Time (12:30 PM)": ["Green Tea (1 cup)"],
+                "Lunch (1:00 PM)": ["Tomato Cucumber Salad (1 katori)", "Torai Ki Subzi (1 katori)", "Besan ki Roti (1 roti)", "Buttermilk (1 cup)"],
+                "Snack (5:00 PM)": ["Green Tea (1 cup)", "Roasted Salted Makhana (1 cup) OR Boiled Peanuts and Corn Chat (1 katori)"],
+                "Dinner (8:00 PM)": ["Paneer Sandwich (1 sandwich)"]
+            }
+        },
+        // Day 13: 02 Jul 25, Wednesday
+        {
+            day: 13, date: "July 02, 2025 - Wednesday",
+            meals: {
+                "Breakfast (9:00 AM)": ["5 black raisins, 4 almonds, 1 walnut (soaked)", "Paneer Stuffed Roti (1 piece)", "Dahi Tadka (1 katori)"],
+                "Mid Morning (11:00 AM)": ["Papaya, Ripe (100 grams)", "Mixed Seeds (1 teaspoon)"],
+                "Tea Time (12:30 PM)": ["Green Tea (1 cup)"],
+                "Lunch (1:00 PM)": ["Tomato Cucumber Salad (1 katori)", "Buttermilk (1 cup)", "Cooked Arhar Dal (1 katori)", "Cooked White Rice (1 katori)"],
+                "Snack (5:00 PM)": ["Green Tea (1 cup)", "Roasted Salted Makhana (1 cup) OR Boiled Peanuts and Corn Chat (1 katori)"],
+                "Dinner (8:00 PM)": ["Green Peas Moong Daal Khichdi (1 katori)"]
+            }
+        },
+        // Day 14: 03 Jul 25, Thursday
+        {
+            day: 14, date: "July 03, 2025 - Thursday",
+            meals: {
+                "Breakfast (9:00 AM)": ["5 black raisins, 4 almonds, 1 walnut (soaked)", "Multigrain Bread Vegetable Sandwich (1 sandwich)"],
+                "Mid Morning (11:00 AM)": ["Papaya, Ripe (100 grams)", "Mixed Seeds (1 teaspoon)"],
+                "Tea Time (12:30 PM)": ["Green Tea (1 cup)"],
+                "Lunch (1:00 PM)": ["Vegetable Chickpeas Salad (1 bowl)", "Buttermilk (1 cup)"],
+                "Snack (5:00 PM)": ["Green Tea (1 cup)", "Roasted Salted Makhana (1 cup) OR Boiled Peanuts and Corn Chat (1 katori)"],
+                "Dinner (8:00 PM)": ["Oats Khichdi (1 katori)"]
+            }
+        },
+    ];
 
-            function renderDayButtons() {
-                dietData.forEach(dayData => {
-                    const button = document.createElement('button');
-                    button.textContent = `Day ${dayData.day}`;
-                    button.classList.add('day-button');
-                    if (dayData.day === activeDay) {
-                        button.classList.add('active');
-                    }
-                    button.addEventListener('click', () => {
-                        activeDay = dayData.day;
-                        document.querySelectorAll('#day-selector .day-button').forEach(btn => btn.classList.remove('active'));
-                        button.classList.add('active');
-                        renderMeals(activeDay);
-                    });
-                    daySelector.appendChild(button);
+    document.addEventListener('DOMContentLoaded', () => {
+        const daySelector = document.getElementById('day-selector');
+        const mealDisplay = document.getElementById('meal-display');
+        const mealDisplayDate = document.getElementById('meal-display-date');
+        const weekSelector = document.getElementById('week-selector');
+        const dietTableBody = document.getElementById('diet-table-body');
+        let activeDay = 1;
+
+        function renderMeals(day) {
+            const dayData = dietData.find(d => d.day === day);
+            if (!dayData) return;
+
+            mealDisplayDate.textContent = `Day ${dayData.day}: ${dayData.date}`;
+            mealDisplay.innerHTML = '';
+
+            for (const [mealTime, items] of Object.entries(dayData.meals)) {
+                const mealCard = document.createElement('div');
+                mealCard.className = 'meal-card rounded-lg';
+                
+                const timeDiv = document.createElement('div');
+                timeDiv.className = 'w-1/3 md:w-1/4 font-bold text-slate-800';
+                timeDiv.textContent = mealTime;
+                
+                const itemsDiv = document.createElement('div');
+                itemsDiv.className = 'w-2/3 md:w-3/4 text-slate-600';
+                
+                const ul = document.createElement('ul');
+                ul.className = 'list-disc list-inside';
+                items.forEach(item => {
+                    const li = document.createElement('li');
+                    li.textContent = item;
+                    ul.appendChild(li);
                 });
-            }
 
-            renderDayButtons();
-            renderMeals(activeDay);
+                itemsDiv.appendChild(ul);
+                mealCard.appendChild(timeDiv);
+                mealCard.appendChild(itemsDiv);
+                mealDisplay.appendChild(mealCard);
+            }
+        }
+
+        function renderDayButtons() {
+            dietData.forEach(dayData => {
+                const button = document.createElement('button');
+                button.textContent = `Day ${dayData.day}`;
+                button.classList.add('day-button');
+                if (dayData.day === activeDay) {
+                    button.classList.add('active');
+                }
+                button.addEventListener('click', () => {
+                    activeDay = dayData.day;
+                    document.querySelectorAll('#day-selector .day-button').forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    renderMeals(activeDay);
+                });
+                daySelector.appendChild(button);
+            });
+        }
+        
+        function renderTable(week) {
+            dietTableBody.innerHTML = '';
+            const startDay = (week - 1) * 7;
+            const endDay = startDay + 7;
+            const weekData = dietData.slice(startDay, endDay);
+
+            const mealTimes = ["Breakfast (9:00 AM)", "Mid Morning (11:00 AM)", "Tea Time (12:30 PM)", "Lunch (1:00 PM)", "Snack (5:00 PM)", "Dinner (8:00 PM)"];
+
+            weekData.forEach(dayData => {
+                const row = document.createElement('tr');
+                
+                const dayCell = document.createElement('td');
+                dayCell.className = 'px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900';
+                dayCell.innerHTML = `Day ${dayData.day}<br><span class="text-xs text-slate-500">${dayData.date.split(' - ')[1]}</span>`;
+                row.appendChild(dayCell);
+
+                mealTimes.forEach(time => {
+                    const cell = document.createElement('td');
+                    cell.className = 'px-6 py-4 whitespace-normal text-sm text-slate-500 align-top';
+                    const mealItems = dayData.meals[time];
+                    if (mealItems) {
+                        const ul = document.createElement('ul');
+                        ul.className = 'list-disc list-outside pl-4';
+                        mealItems.forEach(item => {
+                            const li = document.createElement('li');
+                            li.textContent = item;
+                            ul.appendChild(li);
+                        });
+                        cell.appendChild(ul);
+                    } else {
+                        cell.textContent = '-';
+                    }
+                    row.appendChild(cell);
+                });
+
+                dietTableBody.appendChild(row);
+            });
+        }
+        
+        weekSelector.addEventListener('change', (e) => {
+            renderTable(parseInt(e.target.value));
         });
+
+        renderDayButtons();
+        renderMeals(activeDay);
+        renderTable(1); // Initial render for week 1
+    });
     </script>
 </body>
-
 </html>
